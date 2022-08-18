@@ -1,0 +1,4 @@
+*.weights
+*.pth
+weight/
+data/

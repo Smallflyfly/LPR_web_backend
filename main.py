@@ -8,6 +8,7 @@ import io
 import os
 import uuid
 
+import cv2
 import yaml
 from fastapi import FastAPI, UploadFile, File
 from minio import Minio
@@ -33,7 +34,19 @@ minio_cfg = cfg['minio']
 bucket_name = minio_cfg['bucket_name']
 
 # load yolo model
+# Initialization parameters
+confThreshold = 0.5  # Confidence threshold
+nmsThreshold = 0.4  # Non-maximum suppression threshold
 
+inpWidth = 416  # 608     # Width of network's input image
+inpHeight = 416  # 608     # Height of network's input image
+
+modelConfiguration = "darknet-yolov3.cfg"
+modelWeights = "model.weights"
+
+net = cv2.dnn.readNetFromDarknet(modelConfiguration, modelWeights)
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 
 @app.post("/image/upload", description='单张图片上传')
