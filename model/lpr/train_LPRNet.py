@@ -107,7 +107,7 @@ def train():
 
         def weights_init(m):
             for key in m.state_dict():
-                if key.split('.')[-1] == 'weight':
+                if key.split('.')[-1] == 'weights':
                     if 'conv' in key:
                         nn.init.kaiming_normal_(m.state_dict()[key], mode='fan_out')
                     if 'bn' in key:

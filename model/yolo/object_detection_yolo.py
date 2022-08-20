@@ -27,7 +27,7 @@ classes = None
 with open(classesFile, 'rt') as f:
     classes = f.read().rstrip('\n').split('\n')
 
-# Give the configuration and weight files for the model and load the network using them.
+# Give the configuration and weights files for the model and load the network using them.
 
 modelConfiguration = "darknet-yolov3.cfg"
 modelWeights = "model.weights"
@@ -83,7 +83,7 @@ def crop_and_save(left, top, right, bottom, filename, im_height, im_width, im, i
     cv.waitKey(0)
     cv.destroyAllWindows()
     filename = filename + f'_out_{index}.jpg'
-    cv.imwrite(filename, im)
+    # cv.imwrite(filename, im)
 
 
 def postprocess(frame, outs, filename=None):
@@ -132,8 +132,8 @@ def postprocess(frame, outs, filename=None):
         width = box[2]
         height = box[3]
         crop_and_save(left, top, left + width, top + height, filename, frameHeight, frameWidth, frame, index)
-        drawPred(classIds[i], confidences[i], left,
-                 top, left + width, top + height)
+        # drawPred(classIds[i], confidences[i], left,
+        #          top, left + width, top + height)
 
 
 # Process inputs
